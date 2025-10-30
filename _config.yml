@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f25/team02-f25-06
 owner: ucsb-cs156-f25
 repo_name: team02-f25-06
-pull_requests: []
+pull_requests: [{"author":{"id":"U_kgDOCm9VLg","is_bot":false,"login":"fortenatalie","name":"Natalie Forte"},"headRefName":"nf-articles-copy-backend","number":61,"title":"NF - Copy Backend CRUD Operations from team01 for Articles","url":"https://github.com/ucsb-cs156-f25/team02-f25-06/pull/61"}]
