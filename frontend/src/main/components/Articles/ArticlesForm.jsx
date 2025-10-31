@@ -66,16 +66,11 @@ function ArticlesForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="url">Url</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-url"}
           id="url"
           type="text"
           isInvalid={Boolean(errors.url)}
           {...register("url", {
             required: "Url is required",
-            maxLength: {
-              value: 255,
-              message: "Max length 255 characters",
-            },
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -86,16 +81,11 @@ function ArticlesForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="explanation">Explanation</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-explanation"}
           id="explanation"
           type="text"
           isInvalid={Boolean(errors.explanation)}
           {...register("explanation", {
             required: "Explanation is required",
-            maxLength: {
-              value: 255,
-              message: "Max length 255 characters",
-            },
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -106,16 +96,11 @@ function ArticlesForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="email">Email</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-email"}
           id="email"
           type="text"
           isInvalid={Boolean(errors.email)}
           {...register("email", {
             required: "Email is required",
-            maxLength: {
-              value: 255,
-              message: "Max length 255 characters",
-            },
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -126,7 +111,6 @@ function ArticlesForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="dateAdded">Date Added (iso format)</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-dateAdded"}
           id="dateAdded"
           type="datetime-local"
           isInvalid={Boolean(errors.dateAdded)}
@@ -140,9 +124,7 @@ function ArticlesForm({
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Button type="submit" data-testid={testIdPrefix + "-submit"}>
-        {buttonLabel}
-      </Button>
+      <Button type="submit">{buttonLabel}</Button>
       <Button
         variant="Secondary"
         onClick={() => navigate(-1)}
