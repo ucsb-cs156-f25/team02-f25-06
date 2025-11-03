@@ -120,5 +120,8 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     await waitFor(() => {
       expect(screen.getByText(/Max length 40 characters/)).toBeInTheDocument();
     });
+
+    const submitBtn = screen.getByTestId(`${testId}-submit`);
+    fireEvent.click(submitBtn);
   });
 });
