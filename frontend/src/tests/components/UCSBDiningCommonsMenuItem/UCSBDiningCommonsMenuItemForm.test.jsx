@@ -112,5 +112,13 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     await waitFor(() => {
       expect(screen.getByText(/Max length 50 characters/)).toBeInTheDocument();
     });
+
+    const stationInput = screen.getByTestId(`${testId}-station`);
+    fireEvent.change(stationInput, { target: { value: "a".repeat(41) } });
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Max length 40 characters/)).toBeInTheDocument();
+    });
   });
 });
