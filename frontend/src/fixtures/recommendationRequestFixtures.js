@@ -39,4 +39,4 @@ const recommendationRequestFixtures = {
   ],
 };
 
-export { ucsbRecommendationRequestsFixtures };
+export { recommendationRequestsFixtures };
