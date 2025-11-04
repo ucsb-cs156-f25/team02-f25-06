@@ -2,10 +2,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router";
 
 import RecommendationRequestForm from "main/components/RecommendationRequests/RecommendationRequestForm";
-import {
-  recommendationRequestFixtures,
-  recommendationRequestFixtures,
-} from "fixtures/recommendationRequestFixtures";
+import { recommendationRequestFixtures } from "fixtures/recommendationRequestFixtures";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
