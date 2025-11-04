@@ -104,7 +104,9 @@ function RecommendationRequestForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="dateRequested">Date Requested (iso format)</Form.Label>
+        <Form.Label htmlFor="dateRequested">
+          Date Requested (iso format)
+        </Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-dateRequested"}
           id="dateRequested"
@@ -144,10 +146,10 @@ function RecommendationRequestForm({
           label="Done"
           data-testid={testIdPrefix + "-done"}
           isInvalid={Boolean(errors.done)}
-          {...register("done")}
+          {...register("done", { required: true })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.done && "Done field is required."}
+          {errors.done && "Done is required."}
         </Form.Control.Feedback>
       </Form.Group>
 
