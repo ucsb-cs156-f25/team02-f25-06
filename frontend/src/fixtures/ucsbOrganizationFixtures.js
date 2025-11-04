@@ -1,12 +1,10 @@
 const ucsbOrganizationFixtures = {
-  oneOrganization: [
-    {
-      "orgCode": "ERSP",
-      "orgTranslationShort": "Early Research Scholars Program",
-      "orgTranslation": "Early Research Scholars Program UCSB",
-      "inactive": false
-    },
-  ],
+  oneOrganization: {
+    "orgCode": "ERSP",
+    "orgTranslationShort": "Early Research Scholars Program",
+    "orgTranslation": "Early Research Scholars Program UCSB",
+    "inactive": false
+  },
 
   threeOrganizations: [
     {
