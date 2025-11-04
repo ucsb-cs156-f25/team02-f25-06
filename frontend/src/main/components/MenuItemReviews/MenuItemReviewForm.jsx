@@ -57,7 +57,7 @@ function MenuItemReviewForm({
               })}
             />
             <Form.Control.Feedback type="invalid">
-              {errors.reviewerEmail && "Item Id is required. "}
+              {errors.itemId && "Item Id is required. "}
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
