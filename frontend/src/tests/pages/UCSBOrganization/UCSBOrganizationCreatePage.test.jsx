@@ -56,14 +56,13 @@ describe("UCSBOrganizationCreatePage tests", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByLabelText("Name")).toBeInTheDocument();
+      expect(screen.getByLabelText("Organization Code")).toBeInTheDocument();
     });
   });
 
   test("on submit, makes request to backend, and redirects to /ucsborganization", async () => {
     const queryClient = new QueryClient();
     const ucsbOrganization = {
-      id: 3,
       orgCode: "AS",
       orgTranslationShort: "Associated Students",
       orgTranslation: "Associated Students UCSB",
