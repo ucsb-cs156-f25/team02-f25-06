@@ -114,7 +114,7 @@ describe("UCSBOrganizationCreatePage tests", () => {
       orgCode: "AS",
       orgTranslationShort: "Associated Students",
       orgTranslation: "Associated Students UCSB",
-      inactive: false,
+      inactive: "false",
     });
 
     // assert - check that the toast was called with the expected message
