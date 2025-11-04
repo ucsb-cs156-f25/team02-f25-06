@@ -60,6 +60,52 @@ describe("UCSBOrganizationForm tests", () => {
     expect(orgCodeInput).toBeDisabled();
   });
 
+  test("Correct Error messsages on missing input", async () => {
+    render(
+      <Router>
+        <UCSBOrganizationForm />
+      </Router>,
+    );
+    await screen.findByTestId("UCSBOrganizationForm-submit");
+    const submitButton = screen.getByTestId("UCSBOrganizationForm-submit");
+
+    fireEvent.click(submitButton);
+
+    await screen.findByText(/Organization Code is required./);
+    expect(screen.getByText(/Short Translation is required./)).toBeInTheDocument();
+    expect(screen.getByText(/Full Translation is required./)).toBeInTheDocument();
+  });
+
+  test("No Error messsages on good input", async () => {
+    const mockSubmitAction = vi.fn();
+
+    render(
+      <Router>
+        <UCSBOrganizationForm submitAction={mockSubmitAction} />
+      </Router>,
+    );
+    await screen.findByTestId("UCSBOrganizationForm-orgCode");
+
+    const orgCodeField = screen.getByTestId("UCSBOrganizationForm-orgCode");
+    const orgTranslationShortField = screen.getByTestId("UCSBOrganizationForm-orgTranslationShort");
+    const orgTranslationField = screen.getByTestId("UCSBOrganizationForm-orgTranslation");
+    const inactiveField = screen.getByTestId("UCSBOrganizationForm-inactive");
+    const submitButton = screen.getByTestId("UCSBOrganizationForm-submit");
+
+    fireEvent.change(orgCodeField, { target: { value: "ERSP" } });
+    fireEvent.change(orgTranslationShortField, { target: { value: "Early Research Scholars Program" } });
+    fireEvent.change(orgTranslationField, { target: { value: "Early Research Scholars Program UCSB" } });
+    fireEvent.change(inactiveField, { target: { value: "false" } });
+    fireEvent.click(submitButton);
+
+    await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
+
+    expect(screen.queryByText(/Organization Code is required./)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Short Translation is required./)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Full Translation is required./)).not.toBeInTheDocument();
+  });
+
+
   test("that navigate(-1) is called when Cancel is clicked", async () => {
     render(
       <QueryClientProvider client={queryClient}>
