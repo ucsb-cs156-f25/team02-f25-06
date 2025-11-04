@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import PlaceholderEditPage from "main/pages/MenuItemReviews/MenuItemReviewEditPage";
+import MenuItemReviewEditPage from "main/pages/MenuItemReviews/MenuItemReviewEditPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router";
 
