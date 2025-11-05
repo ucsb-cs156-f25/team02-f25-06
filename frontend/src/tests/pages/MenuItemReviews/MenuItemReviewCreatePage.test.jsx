@@ -67,6 +67,7 @@ describe("MenuItemReviewCreatePage tests", () => {
       itemId: 5, 
       reviewerEmail: "julia_lin@ucsb.edu",
       stars: 1,
+      dateReviewed: "2025-11-01T23:04:20",
       comments: "i guess i'll just starve then",
     };
 
