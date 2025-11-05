@@ -143,7 +143,7 @@ function RecommendationRequestForm({
           id="done"
           label="Done"
           isInvalid={Boolean(errors.done)}
-          {...register("done", { required: true })}
+          {...register("done")}
         />
         <Form.Control.Feedback type="invalid">
           {errors.done && "Done is required."}
