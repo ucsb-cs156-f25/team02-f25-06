@@ -23,13 +23,15 @@ Empty.args = {
 export const ThreeItemsOrdinaryUser = Template.bind({});
 
 ThreeItemsOrdinaryUser.args = {
-  recommendationRequests: recommendationRequestFixtures.threeRecommendationRequest,
+  recommendationRequests:
+    recommendationRequestFixtures.threeRecommendationRequest,
   currentUser: currentUserFixtures.userOnly,
 };
 
 export const ThreeItemsAdminUser = Template.bind({});
 ThreeItemsAdminUser.args = {
-  recommendationRequests: recommendationRequestFixtures.threeRecommendationRequest,
+  recommendationRequests:
+    recommendationRequestFixtures.threeRecommendationRequest,
   currentUser: currentUserFixtures.adminUser,
 };
 

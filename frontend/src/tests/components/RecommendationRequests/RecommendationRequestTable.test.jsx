@@ -20,8 +20,24 @@ vi.mock("react-router", async () => {
 describe("RecommendationRequestTable tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["id", "Requester Email", "Professor Email", "Explanation", "Date Requested", "Date Needed", "Done"];
-  const expectedFields = ["id", "requesterEmail", "professorEmail", "explanation", "dateRequested", "dateNeeded", "done"];
+  const expectedHeaders = [
+    "id",
+    "Requester Email",
+    "Professor Email",
+    "Explanation",
+    "Date Requested",
+    "Date Needed",
+    "Done",
+  ];
+  const expectedFields = [
+    "id",
+    "requesterEmail",
+    "professorEmail",
+    "explanation",
+    "dateRequested",
+    "dateNeeded",
+    "done",
+  ];
   const testId = "RecommendationRequestTable";
 
   test("renders empty table correctly", () => {
@@ -32,7 +48,10 @@ describe("RecommendationRequestTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <RecommendationRequestTable recommendationRequests={[]} currentUser={currentUser} />
+          <RecommendationRequestTable
+            recommendationRequests={[]}
+            currentUser={currentUser}
+          />
         </MemoryRouter>
       </QueryClientProvider>,
     );
@@ -60,7 +79,9 @@ describe("RecommendationRequestTable tests", () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <RecommendationRequestTable
-            recommendationRequests={recommendationRequestFixtures.threeRecommendationRequest}
+            recommendationRequests={
+              recommendationRequestFixtures.threeRecommendationRequest
+            }
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -114,7 +135,9 @@ describe("RecommendationRequestTable tests", () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <RecommendationRequestTable
-            recommendationRequests={recommendationRequestFixtures.threeRecommendationRequest}
+            recommendationRequests={
+              recommendationRequestFixtures.threeRecommendationRequest
+            }
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -159,7 +182,9 @@ describe("RecommendationRequestTable tests", () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <RecommendationRequestTable
-            recommendationRequests={recommendationRequestFixtures.threeRecommendationRequest}
+            recommendationRequests={
+              recommendationRequestFixtures.threeRecommendationRequest
+            }
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -181,7 +206,9 @@ describe("RecommendationRequestTable tests", () => {
 
     // assert - check that the navigate function was called with the expected path
     await waitFor(() =>
-      expect(mockedNavigate).toHaveBeenCalledWith("/recommendationrequests/edit/1"),
+      expect(mockedNavigate).toHaveBeenCalledWith(
+        "/recommendationrequests/edit/1",
+      ),
     );
   });
 
@@ -199,7 +226,9 @@ describe("RecommendationRequestTable tests", () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <RecommendationRequestTable
-            recommendationRequests={recommendationRequestFixtures.threeRecommendationRequest}
+            recommendationRequests={
+              recommendationRequestFixtures.threeRecommendationRequest
+            }
             currentUser={currentUser}
           />
         </MemoryRouter>

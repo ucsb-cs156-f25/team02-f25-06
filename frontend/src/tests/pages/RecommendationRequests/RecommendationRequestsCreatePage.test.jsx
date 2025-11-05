@@ -72,7 +72,9 @@ describe("RecommendationRequestsCreatePage tests", () => {
       done: false,
     };
 
-    axiosMock.onPost("/api/recommendationrequests/post").reply(202, recommendationRequest);
+    axiosMock
+      .onPost("/api/recommendationrequests/post")
+      .reply(202, recommendationRequest);
 
     render(
       <QueryClientProvider client={queryClient}>
@@ -95,7 +97,9 @@ describe("RecommendationRequestsCreatePage tests", () => {
     const explanationInput = screen.getByLabelText("Explanation");
     expect(explanationInput).toBeInTheDocument();
 
-    const dateRequestedInput = screen.getByLabelText("Date Requested (iso format)");
+    const dateRequestedInput = screen.getByLabelText(
+      "Date Requested (iso format)",
+    );
     expect(dateRequestedInput).toBeInTheDocument();
 
     const dateNeededInput = screen.getByLabelText("Date Needed (iso format)");
@@ -107,11 +111,21 @@ describe("RecommendationRequestsCreatePage tests", () => {
     const createButton = screen.getByText("Create");
     expect(createButton).toBeInTheDocument();
 
-    fireEvent.change(requesterEmailInput, { target: { value: "abhiram_agina@ucsb.edu" } });
-    fireEvent.change(professorEmailInput, { target: { value: "ziad.matni@ucsb.edu" } });
-    fireEvent.change(explanationInput, { target: { value: "This is required for M.S. Applications." } });
-    fireEvent.change(dateRequestedInput, { target: { value: "2025-11-04T02:16:00" } });
-    fireEvent.change(dateNeededInput, { target: { value: "2025-12-25T00:00:00" } });
+    fireEvent.change(requesterEmailInput, {
+      target: { value: "abhiram_agina@ucsb.edu" },
+    });
+    fireEvent.change(professorEmailInput, {
+      target: { value: "ziad.matni@ucsb.edu" },
+    });
+    fireEvent.change(explanationInput, {
+      target: { value: "This is required for M.S. Applications." },
+    });
+    fireEvent.change(dateRequestedInput, {
+      target: { value: "2025-11-04T02:16:00" },
+    });
+    fireEvent.change(dateNeededInput, {
+      target: { value: "2025-12-25T00:00:00" },
+    });
     fireEvent.change(doneInput, { target: { value: false } });
     fireEvent.click(createButton);
 
