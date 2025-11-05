@@ -121,8 +121,8 @@ describe("RecommendationRequestsCreatePage tests", () => {
       requesterEmail: "abhiram_agina@ucsb.edu",
       professorEmail: "ziad.matni@ucsb.edu",
       explanation: "This is required for M.S. Applications.",
-      dateRequested: "2025-11-04T02:16:00",
-      dateNeeded: "2025-12-25T00:00:00",
+      dateRequested: "2025-11-04T02:16",
+      dateNeeded: "2025-12-25T00:00",
       done: false,
     });
 
