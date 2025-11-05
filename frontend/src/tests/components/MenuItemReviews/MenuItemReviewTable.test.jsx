@@ -19,8 +19,22 @@ vi.mock("react-router", async () => {
 describe("MenuItemReviewTable tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["id", "Item Id", "Reviewer Email", "Stars", "Date Reviewed", "Comments"];
-  const expectedFields = ["id", "itemId", "reviewerEmail", "stars", "dateReviewed", "comments"];
+  const expectedHeaders = [
+    "id",
+    "Item Id",
+    "Reviewer Email",
+    "Stars",
+    "Date Reviewed",
+    "Comments",
+  ];
+  const expectedFields = [
+    "id",
+    "itemId",
+    "reviewerEmail",
+    "stars",
+    "dateReviewed",
+    "comments",
+  ];
   const testId = "MenuItemReviewTable";
 
   test("renders empty table correctly", () => {
@@ -79,13 +93,13 @@ describe("MenuItemReviewTable tests", () => {
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
       "1",
     );
-    expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-id`),
-    ).toHaveTextContent("2");
-
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-itemId`)).toHaveTextContent(
-      "1",
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
+      "2",
     );
+
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-itemId`),
+    ).toHaveTextContent("1");
     expect(
       screen.getByTestId(`${testId}-cell-row-1-col-itemId`),
     ).toHaveTextContent("2");

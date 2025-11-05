@@ -64,7 +64,7 @@ describe("MenuItemReviewCreatePage tests", () => {
     const queryClient = new QueryClient();
     const menuItemReview = {
       id: 3,
-      itemId: 5, 
+      itemId: 5,
       reviewerEmail: "julia_lin@ucsb.edu",
       stars: 1,
       dateReviewed: "2025-11-01T23:04:20",
@@ -108,8 +108,12 @@ describe("MenuItemReviewCreatePage tests", () => {
       target: { value: "juliasmom@gmail.com" },
     });
     fireEvent.change(starsInput, { target: { value: 5 } });
-    fireEvent.change(dateReviewedInput, { target: { value: "2025-11-01T23:04:00" } });
-    fireEvent.change(commentsInput, { target: { value: "this was so nutritious for my young julia" } });
+    fireEvent.change(dateReviewedInput, {
+      target: { value: "2025-11-01T23:04:00" },
+    });
+    fireEvent.change(commentsInput, {
+      target: { value: "this was so nutritious for my young julia" },
+    });
     fireEvent.click(createButton);
 
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
@@ -129,4 +133,3 @@ describe("MenuItemReviewCreatePage tests", () => {
     expect(mockNavigate).toBeCalledWith({ to: "/menuitemreviews" });
   });
 });
-

@@ -68,7 +68,9 @@ describe("MenuItemReviewEditPage tests", () => {
         </QueryClientProvider>,
       );
       await screen.findByText("Edit MenuItemReview");
-      expect(screen.queryByTestId("MenuItemReview-name")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("MenuItemReview-name"),
+      ).not.toBeInTheDocument();
       restoreConsole();
     });
   });
@@ -84,21 +86,24 @@ describe("MenuItemReviewEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/menuitemreviews", { params: { id: 17 } }).reply(200, {
-        id: 17,
-        itemId: "2",
-        reviewerEmail: "cat@gmail.com",
-        stars: "3",
-        dateReviewed: "2025-11-01T23:04:20",
-        comments: "meow",
-      });
+      axiosMock
+        .onGet("/api/menuitemreviews", { params: { id: 17 } })
+        .reply(200, {
+          id: 17,
+          itemId: "2",
+          reviewerEmail: "cat@gmail.com",
+          stars: "3",
+          dateReviewed: "2025-11-01T23:04:20",
+          comments: "meow",
+        });
       axiosMock.onPut("/api/menuitemreviews").reply(200, {
         id: "17",
         itemId: "6",
         reviewerEmail: "grumpycat@gmail.com",
         stars: "1",
         dateReviewed: "2024-09-01T23:04:20",
-        comments: "i prefer a dog's companionship to the feeling of this in my stomach",
+        comments:
+          "i prefer a dog's companionship to the feeling of this in my stomach",
       });
     });
 
@@ -124,9 +129,13 @@ describe("MenuItemReviewEditPage tests", () => {
 
       const idField = screen.getByTestId("MenuItemReviewForm-id");
       const itemIdField = screen.getByTestId("MenuItemReviewForm-itemId");
-      const reviewerEmailField = screen.getByTestId("MenuItemReviewForm-reviewerEmail");
+      const reviewerEmailField = screen.getByTestId(
+        "MenuItemReviewForm-reviewerEmail",
+      );
       const starsField = screen.getByTestId("MenuItemReviewForm-stars");
-      const dateReviewedField = screen.getByTestId("MenuItemReviewForm-dateReviewed");
+      const dateReviewedField = screen.getByTestId(
+        "MenuItemReviewForm-dateReviewed",
+      );
       const commentsField = screen.getByTestId("MenuItemReviewForm-comments");
       const submitButton = screen.getByTestId("MenuItemReviewForm-submit");
 
@@ -158,7 +167,10 @@ describe("MenuItemReviewEditPage tests", () => {
         target: { value: "2024-09-01T23:04:20" },
       });
       fireEvent.change(commentsField, {
-        target: { value: "i prefer a dog's companionship to the feeling of this in my stomach" },
+        target: {
+          value:
+            "i prefer a dog's companionship to the feeling of this in my stomach",
+        },
       });
       fireEvent.click(submitButton);
 
@@ -177,7 +189,8 @@ describe("MenuItemReviewEditPage tests", () => {
           reviewerEmail: "grumpycat@gmail.com",
           stars: "1",
           dateReviewed: "2024-09-01T23:04:20.000",
-          comments: "i prefer a dog's companionship to the feeling of this in my stomach",
+          comments:
+            "i prefer a dog's companionship to the feeling of this in my stomach",
         }),
       ); // posted object
     });
@@ -195,9 +208,13 @@ describe("MenuItemReviewEditPage tests", () => {
 
       const idField = screen.getByTestId("MenuItemReviewForm-id");
       const itemIdField = screen.getByTestId("MenuItemReviewForm-itemId");
-      const reviewerEmailField = screen.getByTestId("MenuItemReviewForm-reviewerEmail");
+      const reviewerEmailField = screen.getByTestId(
+        "MenuItemReviewForm-reviewerEmail",
+      );
       const starsField = screen.getByTestId("MenuItemReviewForm-stars");
-      const dateReviewedField = screen.getByTestId("MenuItemReviewForm-dateReviewed");
+      const dateReviewedField = screen.getByTestId(
+        "MenuItemReviewForm-dateReviewed",
+      );
       const commentsField = screen.getByTestId("MenuItemReviewForm-comments");
       const submitButton = screen.getByTestId("MenuItemReviewForm-submit");
 
@@ -223,15 +240,18 @@ describe("MenuItemReviewEditPage tests", () => {
         target: { value: "2024-09-01T23:04:20" },
       });
       fireEvent.change(commentsField, {
-        target: { value: "i prefer a dog's companionship to the feeling of this in my stomach" },
+        target: {
+          value:
+            "i prefer a dog's companionship to the feeling of this in my stomach",
+        },
       });
       fireEvent.click(submitButton);
 
       await waitFor(() => expect(mockToast).toBeCalled());
-            expect(mockToast).toBeCalledWith(
-              "MenuItemReview Updated - id: 17 stars: 1",
-            );
-            expect(mockNavigate).toBeCalledWith({ to: "/menuitemreviews" });
+      expect(mockToast).toBeCalledWith(
+        "MenuItemReview Updated - id: 17 stars: 1",
+      );
+      expect(mockNavigate).toBeCalledWith({ to: "/menuitemreviews" });
     });
   });
 });
