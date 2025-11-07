@@ -1,8 +1,10 @@
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import { ucsbDiningCommonsMenuItemFixtures } from "fixtures/ucsbDiningCommonsMenuItemFixtures";
 
-const firstItemId = ucsbDiningCommonsMenuItemFixtures.threeItems[0].id.toString();
-const secondItemId = ucsbDiningCommonsMenuItemFixtures.threeItems[1].id.toString();
+const firstItemId =
+  ucsbDiningCommonsMenuItemFixtures.threeItems[0].id.toString();
+const secondItemId =
+  ucsbDiningCommonsMenuItemFixtures.threeItems[1].id.toString();
 import UCSBDiningCommonsMenuItemTable from "main/components/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemTable";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router";
@@ -88,26 +90,34 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     );
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-diningCommonsCode`),
-    ).toHaveTextContent(ucsbDiningCommonsMenuItemFixtures.threeItems[0].diningCommonsCode);
+    ).toHaveTextContent(
+      ucsbDiningCommonsMenuItemFixtures.threeItems[0].diningCommonsCode,
+    );
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-name`),
     ).toHaveTextContent(ucsbDiningCommonsMenuItemFixtures.threeItems[0].name);
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-station`),
-    ).toHaveTextContent(ucsbDiningCommonsMenuItemFixtures.threeItems[0].station);
+    ).toHaveTextContent(
+      ucsbDiningCommonsMenuItemFixtures.threeItems[0].station,
+    );
 
     expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
       secondItemId,
     );
     expect(
       screen.getByTestId(`${testId}-cell-row-1-col-diningCommonsCode`),
-    ).toHaveTextContent(ucsbDiningCommonsMenuItemFixtures.threeItems[1].diningCommonsCode);
+    ).toHaveTextContent(
+      ucsbDiningCommonsMenuItemFixtures.threeItems[1].diningCommonsCode,
+    );
     expect(
       screen.getByTestId(`${testId}-cell-row-1-col-name`),
     ).toHaveTextContent(ucsbDiningCommonsMenuItemFixtures.threeItems[1].name);
     expect(
       screen.getByTestId(`${testId}-cell-row-1-col-station`),
-    ).toHaveTextContent(ucsbDiningCommonsMenuItemFixtures.threeItems[1].station);
+    ).toHaveTextContent(
+      ucsbDiningCommonsMenuItemFixtures.threeItems[1].station,
+    );
 
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`,
@@ -154,26 +164,34 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     );
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-diningCommonsCode`),
-    ).toHaveTextContent(ucsbDiningCommonsMenuItemFixtures.threeItems[0].diningCommonsCode);
+    ).toHaveTextContent(
+      ucsbDiningCommonsMenuItemFixtures.threeItems[0].diningCommonsCode,
+    );
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-name`),
     ).toHaveTextContent(ucsbDiningCommonsMenuItemFixtures.threeItems[0].name);
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-station`),
-    ).toHaveTextContent(ucsbDiningCommonsMenuItemFixtures.threeItems[0].station);
+    ).toHaveTextContent(
+      ucsbDiningCommonsMenuItemFixtures.threeItems[0].station,
+    );
 
     expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
       secondItemId,
     );
     expect(
       screen.getByTestId(`${testId}-cell-row-1-col-diningCommonsCode`),
-    ).toHaveTextContent(ucsbDiningCommonsMenuItemFixtures.threeItems[1].diningCommonsCode);
+    ).toHaveTextContent(
+      ucsbDiningCommonsMenuItemFixtures.threeItems[1].diningCommonsCode,
+    );
     expect(
       screen.getByTestId(`${testId}-cell-row-1-col-name`),
     ).toHaveTextContent(ucsbDiningCommonsMenuItemFixtures.threeItems[1].name);
     expect(
       screen.getByTestId(`${testId}-cell-row-1-col-station`),
-    ).toHaveTextContent(ucsbDiningCommonsMenuItemFixtures.threeItems[1].station);
+    ).toHaveTextContent(
+      ucsbDiningCommonsMenuItemFixtures.threeItems[1].station,
+    );
 
     expect(screen.queryByText("Delete")).not.toBeInTheDocument();
     expect(screen.queryByText("Edit")).not.toBeInTheDocument();
@@ -201,13 +219,17 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     ).toHaveTextContent(firstItemId);
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-diningCommonsCode`),
-    ).toHaveTextContent(ucsbDiningCommonsMenuItemFixtures.threeItems[0].diningCommonsCode);
+    ).toHaveTextContent(
+      ucsbDiningCommonsMenuItemFixtures.threeItems[0].diningCommonsCode,
+    );
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-name`),
     ).toHaveTextContent(ucsbDiningCommonsMenuItemFixtures.threeItems[0].name);
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-station`),
-    ).toHaveTextContent(ucsbDiningCommonsMenuItemFixtures.threeItems[0].station);
+    ).toHaveTextContent(
+      ucsbDiningCommonsMenuItemFixtures.threeItems[0].station,
+    );
 
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`,
@@ -220,7 +242,7 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     // assert - check that the navigate function was called with the expected path
     await waitFor(() =>
       expect(mockedNavigate).toHaveBeenCalledWith(
-        `/ucsbdiningcommonsmenuitem/edit/${ucsbDiningCommonsMenuItemFixtures.threeItems[0].id}`
+        `/ucsbdiningcommonsmenuitem/edit/${ucsbDiningCommonsMenuItemFixtures.threeItems[0].id}`,
       ),
     );
   });
@@ -252,13 +274,17 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     ).toHaveTextContent(firstItemId);
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-diningCommonsCode`),
-    ).toHaveTextContent(ucsbDiningCommonsMenuItemFixtures.threeItems[0].diningCommonsCode);
+    ).toHaveTextContent(
+      ucsbDiningCommonsMenuItemFixtures.threeItems[0].diningCommonsCode,
+    );
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-name`),
     ).toHaveTextContent(ucsbDiningCommonsMenuItemFixtures.threeItems[0].name);
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-station`),
-    ).toHaveTextContent(ucsbDiningCommonsMenuItemFixtures.threeItems[0].station);
+    ).toHaveTextContent(
+      ucsbDiningCommonsMenuItemFixtures.threeItems[0].station,
+    );
 
     const deleteButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Delete-button`,
@@ -271,6 +297,8 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     // assert - check that the delete endpoint was called
 
     await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
-    expect(axiosMock.history.delete[0].params).toEqual({ id: ucsbDiningCommonsMenuItemFixtures.threeItems[0].id });
+    expect(axiosMock.history.delete[0].params).toEqual({
+      id: ucsbDiningCommonsMenuItemFixtures.threeItems[0].id,
+    });
   });
 });
