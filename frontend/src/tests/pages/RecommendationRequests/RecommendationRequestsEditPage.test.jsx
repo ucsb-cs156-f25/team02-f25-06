@@ -1,16 +1,7 @@
-import { vi } from "vitest";
-
-vi.mock("react-toastify", () => ({
-  __esModule: true,
-  toast: vi.fn(),
-}));
-
-import { toast } from "react-toastify";
-
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router";
-import RecommendationRequestsEditPage from "main/pages/RecommendationRequests/RecommendationRequestsEditPage";
+import RestaurantEditPage from "main/pages/Restaurants/RestaurantEditPage";
 
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
@@ -18,9 +9,7 @@ import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 import mockConsole from "tests/testutils/mockConsole";
 
-//const mockToast = vi.fn();
-
-/*
+const mockToast = vi.fn();
 vi.mock("react-toastify", async (importOriginal) => {
   const originalModule = await importOriginal();
   return {
@@ -28,7 +17,6 @@ vi.mock("react-toastify", async (importOriginal) => {
     toast: vi.fn((x) => mockToast(x)),
   };
 });
-*/
 
 const mockNavigate = vi.fn();
 vi.mock("react-router", async (importOriginal) => {
@@ -46,7 +34,7 @@ vi.mock("react-router", async (importOriginal) => {
 });
 
 let axiosMock;
-describe("RecommendationRequestsEditPage tests", () => {
+describe("RestaurantEditPage tests", () => {
   describe("when the backend doesn't return data", () => {
     beforeEach(() => {
       axiosMock = new AxiosMockAdapter(axios);
@@ -58,29 +46,29 @@ describe("RecommendationRequestsEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/recommendationrequests", { params: { id: 17 } }).timeout();
+      axiosMock.onGet("/api/restaurants", { params: { id: 17 } }).timeout();
     });
 
     afterEach(() => {
-      toast.mockClear();
+      mockToast.mockClear();
       mockNavigate.mockClear();
       axiosMock.restore();
       axiosMock.resetHistory();
     });
 
     const queryClient = new QueryClient();
-    test("renders header but form is not present", async () => {
+    test("renders header but table is not present", async () => {
       const restoreConsole = mockConsole();
 
       render(
         <QueryClientProvider client={queryClient}>
           <MemoryRouter>
-            <RecommendationRequestsEditPage />
+            <RestaurantEditPage />
           </MemoryRouter>
         </QueryClientProvider>,
       );
-      await screen.findByText("Edit Recommendation Request");
-      expect(screen.queryByTestId("RecommendationRequest-requesterEmail")).not.toBeInTheDocument();
+      await screen.findByText("Edit Restaurant");
+      expect(screen.queryByTestId("Restaurant-name")).not.toBeInTheDocument();
       restoreConsole();
     });
   });
@@ -96,28 +84,20 @@ describe("RecommendationRequestsEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/recommendationrequests", { params: { id: 17 } }).reply(200, {
+      axiosMock.onGet("/api/restaurants", { params: { id: 17 } }).reply(200, {
         id: 17,
-        requesterEmail: "abhiram_agina@ucsb.edu",
-        professorEmail: "ziad.matni@ucsb.edu",
-        explanation: "This is required for M.S. Applications.",
-        dateRequested: "2025-11-04T02:16:01",
-        dateNeeded: "2025-12-25T00:00:01",
-        done: false,
+        name: "Freebirds",
+        description: "Burritos",
       });
-      axiosMock.onPut("/api/recommendationrequests").reply(200, {
+      axiosMock.onPut("/api/restaurants").reply(200, {
         id: "17",
-        requesterEmail: "abhiram_agina1@ucsb.edu",
-        professorEmail: "ziad.matni1@ucsb.edu",
-        explanation: "This is required for M.B.A. Applications.",
-        dateRequested: "2025-11-04T02:17:01",
-        dateNeeded: "2025-12-25T01:00:01",
-        done: true,
+        name: "Freebirds World Burrito",
+        description: "Really big Burritos",
       });
     });
 
     afterEach(() => {
-      toast.mockClear();
+      mockToast.mockClear();
       mockNavigate.mockClear();
       axiosMock.restore();
       axiosMock.resetHistory();
@@ -125,78 +105,52 @@ describe("RecommendationRequestsEditPage tests", () => {
 
     const queryClient = new QueryClient();
 
-    test.only("Is populated with the data provided", async () => {
+    test("Is populated with the data provided", async () => {
       render(
         <QueryClientProvider client={queryClient}>
           <MemoryRouter>
-            <RecommendationRequestsEditPage />
+            <RestaurantEditPage />
           </MemoryRouter>
         </QueryClientProvider>,
       );
 
-      await screen.findByTestId("RecommendationRequestForm-id");
+      await screen.findByTestId("RestaurantForm-id");
 
-      const idField = screen.getByTestId("RecommendationRequestForm-id");
-      const requesterEmailField = screen.getByTestId("RecommendationRequestForm-requesterEmail");
-      const professorEmailField = screen.getByTestId("RecommendationRequestForm-professorEmail");
-      const explanationField = screen.getByTestId("RecommendationRequestForm-explanation");
-      const dateRequestedField = screen.getByLabelText("Date Requested (iso format)");
-      const dateNeededField = screen.getByLabelText("Date Needed (iso format)");
-      const doneField = screen.getByLabelText("Done");
-      const submitButton = screen.getByText("Update");
+      const idField = screen.getByTestId("RestaurantForm-id");
+      const nameField = screen.getByTestId("RestaurantForm-name");
+      const descriptionField = screen.getByTestId("RestaurantForm-description");
+      const submitButton = screen.getByTestId("RestaurantForm-submit");
 
       expect(idField).toBeInTheDocument();
       expect(idField).toHaveValue("17");
-      expect(requesterEmailField).toBeInTheDocument();
-      expect(requesterEmailField).toHaveValue("abhiram_agina@ucsb.edu");
-      expect(professorEmailField).toBeInTheDocument();
-      expect(professorEmailField).toHaveValue("ziad.matni@ucsb.edu");
-      expect(explanationField).toBeInTheDocument();
-      expect(explanationField).toHaveValue("This is required for M.S. Applications.");
-      expect(dateRequestedField).toBeInTheDocument();
-      expect(dateRequestedField).toHaveValue("2025-11-04T02:16:01.000");
-      expect(dateNeededField).toBeInTheDocument();
-      expect(dateNeededField).toHaveValue("2025-12-25T00:00:01.000");
-      expect(doneField).toBeInTheDocument();
-      expect(doneField).not.toBeChecked();
+      expect(nameField).toBeInTheDocument();
+      expect(nameField).toHaveValue("Freebirds");
+      expect(descriptionField).toBeInTheDocument();
+      expect(descriptionField).toHaveValue("Burritos");
 
       expect(submitButton).toHaveTextContent("Update");
 
-      fireEvent.change(requesterEmailField, {
-        target: { value: "abhiram_agina1@ucsb.edu" },
+      fireEvent.change(nameField, {
+        target: { value: "Freebirds World Burrito" },
       });
-      fireEvent.change(professorEmailField, {
-        target: { value: "ziad.matni1@ucsb.edu" },
+      fireEvent.change(descriptionField, {
+        target: { value: "Totally Giant Burritos" },
       });
-      fireEvent.change(explanationField, {
-        target: { value: "This is required for M.B.A. Applications." },
-      });
-      fireEvent.change(dateRequestedField, {
-        target: { value: "2025-11-04T02:17:01.000" },
-      });
-      fireEvent.change(dateNeededField, {
-        target: { value: "2025-12-25T01:00:01.000" },
-      });
-      fireEvent.change(doneField, { target: { checked: true } });
       fireEvent.click(submitButton);
 
-      await waitFor(() => expect(toast).toHaveBeenCalled()); //toBeCalled
-      expect(toast).toHaveBeenCalledWith(
-        "Recommendation Request Updated - id: 17 requesterEmail: abhiram_agina1@ucsb.edu",
+      await waitFor(() => expect(mockToast).toBeCalled());
+      expect(mockToast).toBeCalledWith(
+        "Restaurant Updated - id: 17 name: Freebirds World Burrito",
       );
 
-      expect(mockNavigate).toBeCalledWith({ to: "/recommendationrequests" });
+      expect(mockNavigate).toBeCalledWith({ to: "/restaurants" });
 
       expect(axiosMock.history.put.length).toBe(1); // times called
       expect(axiosMock.history.put[0].params).toEqual({ id: 17 });
       expect(axiosMock.history.put[0].data).toBe(
         JSON.stringify({
-          requesterEmail: "abhiram_agina1@ucsb.edu",
-          professorEmail: "ziad.matni1@ucsb.edu",
-          explanation: "This is required for M.B.A. Applications.",
-          dateRequested: "2025-11-04T02:17:01.000",
-          dateNeeded: "2025-12-25T01:00:01.000",
-          done: true,
+          name: "Freebirds World Burrito",
+          description: "Totally Giant Burritos",
         }),
       ); // posted object
     });
@@ -205,17 +159,17 @@ describe("RecommendationRequestsEditPage tests", () => {
       render(
         <QueryClientProvider client={queryClient}>
           <MemoryRouter>
-            <RecoEditPage />
+            <RestaurantEditPage />
           </MemoryRouter>
         </QueryClientProvider>,
       );
 
-      await screen.findByTestId("RecommendationRequestForm-id");
+      await screen.findByTestId("RestaurantForm-id");
 
-      const idField = screen.getByTestId("RecommendationRequestForm-id");
-      const nameField = screen.getByTestId("RecommendationRequestForm-name");
-      const descriptionField = screen.getByTestId("RecommendationRequestForm-description");
-      const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
+      const idField = screen.getByTestId("RestaurantForm-id");
+      const nameField = screen.getByTestId("RestaurantForm-name");
+      const descriptionField = screen.getByTestId("RestaurantForm-description");
+      const submitButton = screen.getByTestId("RestaurantForm-submit");
 
       expect(idField).toHaveValue("17");
       expect(nameField).toHaveValue("Freebirds");
@@ -229,12 +183,11 @@ describe("RecommendationRequestsEditPage tests", () => {
 
       fireEvent.click(submitButton);
 
-      await waitFor(() => expect(toast).toBeCalled());
-      expect(toast).toBeCalledWith(
+      await waitFor(() => expect(mockToast).toBeCalled());
+      expect(mockToast).toBeCalledWith(
         "Restaurant Updated - id: 17 name: Freebirds World Burrito",
       );
-      expect(mockNavigate).toBeCalledWith({ to: "/recommendationrequests" });
+      expect(mockNavigate).toBeCalledWith({ to: "/restaurants" });
     });
   });
-
 });
