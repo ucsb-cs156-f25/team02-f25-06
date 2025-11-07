@@ -41,7 +41,7 @@ export default function RecommendationRequestsEditPage({ storybook = false }) {
     },
   });
 
-  const onSuccess = (restaurant) => {
+  const onSuccess = (recommendationRequest) => {
     toast(`Recommendation Request Updated - id: ${recommendationRequest.id} explanation: ${recommendationRequest.explanation}`);
   };
 
