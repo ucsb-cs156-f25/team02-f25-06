@@ -46,6 +46,23 @@ function MenuItemReviewForm({
 
         <Col>
           <Form.Group className="mb-3">
+            <Form.Label htmlFor="itemId">Item Id</Form.Label>
+            <Form.Control
+              data-testid="MenuItemReviewForm-itemId"
+              id="itemId"
+              type="int"
+              isInvalid={Boolean(errors.itemId)}
+              {...register("itemId", {
+                required: true,
+              })}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.itemId && "Item Id is required. "}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group className="mb-3">
             <Form.Label htmlFor="reviewerEmail">Reviewer Email</Form.Label>
             <Form.Control
               data-testid="MenuItemReviewForm-reviewerEmail"
@@ -81,7 +98,7 @@ function MenuItemReviewForm({
         <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="dateReviewed">
-              Date Reviewed (ISO format)
+              Date Reviewed
             </Form.Label>
             <Form.Control
               data-testid="MenuItemReviewForm-dateReviewed"

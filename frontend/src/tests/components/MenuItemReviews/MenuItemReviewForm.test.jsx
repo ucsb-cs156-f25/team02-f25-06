@@ -19,9 +19,10 @@ describe("MenuItemReviewForm tests", () => {
   const queryClient = new QueryClient();
 
   const expectedHeaders = [
+    "Item Id", 
     "Reviewer Email",
     "Stars",
-    "Date Reviewed (ISO format)",
+    "Date Reviewed",
     "Comments",
   ];
   const testId = "MenuItemReviewForm";
@@ -95,6 +96,7 @@ describe("MenuItemReviewForm tests", () => {
     fireEvent.click(submitButton);
 
     await screen.findByText(/Reviewer email is required/);
+    expect(screen.getByText(/Item Id is required/)).toBeInTheDocument();
     expect(screen.getByText(/Stars is required/)).toBeInTheDocument();
     expect(screen.getByText(/Date reviewed is required/)).toBeInTheDocument();
     expect(screen.getByText(/Comments is required/)).toBeInTheDocument();
