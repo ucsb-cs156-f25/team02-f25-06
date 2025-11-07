@@ -14,6 +14,10 @@ import RestaurantEditPage from "main/pages/Restaurants/RestaurantEditPage";
 import RecommendationRequestsIndexPage from "main/pages/RecommendationRequests/RecommendationRequestsIndexPage";
 import RecommendationRequestsCreatePage from "main/pages/RecommendationRequests/RecommendationRequestsCreatePage";
 import RecommendationRequestsEditPage from "main/pages/RecommendationRequests/RecommendationRequestsEditPage";
+import MenuItemReviewIndexPage from "main/pages/MenuItemReviews/MenuItemReviewIndexPage";
+import MenuItemReviewCreatePage from "main/pages/MenuItemReviews/MenuItemReviewCreatePage";
+import MenuItemReviewEditPage from "main/pages/MenuItemReviews/MenuItemReviewEditPage";
+
 import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizationIndexPage";
 import UCSBOrganizationCreatePage from "main/pages/UCSBOrganization/UCSBOrganizationCreatePage";
 import UCSBOrganizationEditPage from "main/pages/UCSBOrganization/UCSBOrganizationEditPage";
@@ -108,6 +112,25 @@ function App() {
       )}
       {hasRole(currentUser, "ROLE_USER") && (
         <>
+          <Route exact path="/menuitemreviews" element={<MenuItemReviewIndexPage />} />
+        </>
+      )}
+      {hasRole(currentUser, "ROLE_ADMIN") && (
+        <>
+          <Route
+            exact
+            path="/menuitemreviews/edit/:id"
+            element={<MenuItemReviewEditPage />}
+          />
+          <Route
+            exact
+            path="/menuitemreviews/create"
+            element={<MenuItemReviewCreatePage />}
+          />
+        </>
+      )}
+      {hasRole(currentUser, "ROLE_USER") && (
+        <>
           <Route
             exact
             path="/ucsborganization"
@@ -157,13 +180,13 @@ function App() {
         <>
           <Route
             exact
-            path="/placeholder/edit/:id"
-            element={<PlaceholderEditPage />}
+            path="/menuitemreviews/edit/:id"
+            element={<MenuItemReviewEditPage />}
           />
           <Route
             exact
-            path="/placeholder/create"
-            element={<PlaceholderCreatePage />}
+            path="/menuitemreviews/create"
+            element={<MenuItemReviewCreatePage />}
           />
         </>
       )}
