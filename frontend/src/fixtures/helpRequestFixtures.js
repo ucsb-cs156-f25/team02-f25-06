@@ -8,12 +8,12 @@ const helpRequestFixtures = {
         explanation: "I need help",
         solved: false
     },
-    threeHelpRequest: [
+    threeHelpRequests: [
         {
             id: 1,
             requesterEmail: "natalieforte@ucsb.edu",
             teamId: "team06",
-            tableOrBreakoutRoom: "table06",
+            tableOrBreakoutRoom: "Table 6",
             requestTime: "2025-10-31T09:00:00",
             explanation: "My computer exploded",
             solved: false
@@ -22,7 +22,7 @@ const helpRequestFixtures = {
             id: 2,
             requesterEmail: "abhiram_agina@ucsb.edu",
             teamId: "team07",
-            tableOrBreakoutRoom: "table07",
+            tableOrBreakoutRoom: "Table 7",
             requestTime: "2025-10-30T12:00:00",
             explanation: "Please help me",
             solved: false
@@ -31,7 +31,7 @@ const helpRequestFixtures = {
             id: 3,
             requesterEmail: "austinchan@ucsb.edu",
             teamId: "team08",
-            tableOrBreakoutRoom: "table08",
+            tableOrBreakoutRoom: "Table 8",
             requestTime: "2025-10-29T16:00:00",
             explanation: "I have no Wifi",
             solved: true
