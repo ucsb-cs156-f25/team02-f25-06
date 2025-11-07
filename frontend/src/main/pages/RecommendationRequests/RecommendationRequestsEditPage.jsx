@@ -1,51 +1,55 @@
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 import { useParams } from "react-router";
-import RestaurantForm from "main/components/Restaurants/RestaurantForm";
+import RecommendationRequestForm from "main/components/RecommendationRequests/RecommendationRequestForm";
 import { Navigate } from "react-router";
 import { useBackend, useBackendMutation } from "main/utils/useBackend";
 import { toast } from "react-toastify";
 
-export default function RestaurantEditPage({ storybook = false }) {
+export default function RecommendationRequestsEditPage({ storybook = false }) {
   let { id } = useParams();
 
   const {
-    data: restaurant,
+    data: recommendationRequest,
     _error,
     _status,
   } = useBackend(
     // Stryker disable next-line all : don't test internal caching of React Query
-    [`/api/restaurants?id=${id}`],
+    [`/api/recommendationrequests?id=${id}`],
     {
       // Stryker disable next-line all : GET is the default, so mutating this to "" doesn't introduce a bug
       method: "GET",
-      url: `/api/restaurants`,
+      url: `/api/recommendationrequests`,
       params: {
         id,
       },
     },
   );
 
-  const objectToAxiosPutParams = (restaurant) => ({
-    url: "/api/restaurants",
+  const objectToAxiosPutParams = (recommendationRequest) => ({
+    url: "/api/recommendationrequests",
     method: "PUT",
     params: {
-      id: restaurant.id,
+      id: recommendationRequest.id,
     },
     data: {
-      name: restaurant.name,
-      description: restaurant.description,
+      requesterEmail: recommendationRequest.requesterEmail,
+      professorEmail: recommendationRequest.professorEmail,
+      explanation: recommendationRequest.explanation,
+      dateRequested: recommendationRequest.dateRequested,
+      dateNeeded: recommendationRequest.dateNeeded,
+      done: recommendationRequest.done
     },
   });
 
   const onSuccess = (restaurant) => {
-    toast(`Restaurant Updated - id: ${restaurant.id} name: ${restaurant.name}`);
+    toast(`Recommendation Request Updated - id: ${recommendationRequest.id} explanation: ${recommendationRequest.explanation}`);
   };
 
   const mutation = useBackendMutation(
     objectToAxiosPutParams,
     { onSuccess },
     // Stryker disable next-line all : hard to set up test for caching
-    [`/api/restaurants?id=${id}`],
+    [`/api/recommendationrequests?id=${id}`],
   );
 
   const { isSuccess } = mutation;
@@ -55,18 +59,18 @@ export default function RestaurantEditPage({ storybook = false }) {
   };
 
   if (isSuccess && !storybook) {
-    return <Navigate to="/restaurants" />;
+    return <Navigate to="/recommendationrequests" />;
   }
 
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>Edit Restaurant</h1>
-        {restaurant && (
-          <RestaurantForm
+        <h1>Edit Recommendation Request</h1>
+        {recommendationRequest && (
+          <RecommendationRequestForm
             submitAction={onSubmit}
             buttonLabel={"Update"}
-            initialContents={restaurant}
+            initialContents={recommendationRequest}
           />
         )}
       </div>
