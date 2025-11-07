@@ -2,7 +2,7 @@ import React from "react";
 import { useBackend } from "main/utils/useBackend";
 
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
-import RecommendationRequestTable from "main/components/Restaurants/RestaurantTable";
+import RecommendationRequestTable from "main/components/RecommendationRequests/RecommendationRequestTable";
 import { useCurrentUser, hasRole } from "main/utils/useCurrentUser";
 import { Button } from "react-bootstrap";
 
