@@ -14,6 +14,7 @@ import RestaurantEditPage from "main/pages/Restaurants/RestaurantEditPage";
 import RecommendationRequestsIndexPage from "main/pages/RecommendationRequests/RecommendationRequestsIndexPage";
 import RecommendationRequestsCreatePage from "main/pages/RecommendationRequests/RecommendationRequestsCreatePage";
 import RecommendationRequestsEditPage from "main/pages/RecommendationRequests/RecommendationRequestsEditPage";
+
 import MenuItemReviewIndexPage from "main/pages/MenuItemReviews/MenuItemReviewIndexPage";
 import MenuItemReviewCreatePage from "main/pages/MenuItemReviews/MenuItemReviewCreatePage";
 import MenuItemReviewEditPage from "main/pages/MenuItemReviews/MenuItemReviewEditPage";
@@ -29,6 +30,7 @@ import UCSBDiningCommonsMenuItemEditPage from "main/pages/UCSBDiningCommonsMenuI
 import ArticlesIndexPage from "main/pages/Articles/ArticlesIndexPage";
 import ArticlesCreatePage from "main/pages/Articles/ArticlesCreatePage";
 import ArticlesEditPage from "main/pages/Articles/ArticlesEditPage";
+
 
 import PlaceholderIndexPage from "main/pages/Placeholder/PlaceholderIndexPage";
 import PlaceholderCreatePage from "main/pages/Placeholder/PlaceholderCreatePage";
@@ -180,12 +182,12 @@ function App() {
         <>
           <Route
             exact
-            path="/menuitemreviews/edit/:id"
+            path="/placeholder/edit/:id"
             element={<MenuItemReviewEditPage />}
           />
           <Route
             exact
-            path="/menuitemreviews/create"
+            path="/placeholder/create"
             element={<MenuItemReviewCreatePage />}
           />
         </>
