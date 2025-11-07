@@ -154,12 +154,12 @@ function App() {
         <>
           <Route
             exact
-            path="/menuitemreviews/edit/:id"
+            path="/placeholder/edit/:id"
             element={<MenuItemReviewEditPage />}
           />
           <Route
             exact
-            path="/menuitemreviews/create"
+            path="/placeholder/create"
             element={<MenuItemReviewCreatePage />}
           />
         </>
