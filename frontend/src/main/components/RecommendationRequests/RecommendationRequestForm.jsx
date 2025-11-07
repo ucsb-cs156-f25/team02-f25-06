@@ -142,11 +142,25 @@ function RecommendationRequestForm({
           type="checkbox"
           id="done"
           label="Done"
+<<<<<<< HEAD
           {...register("done")}
         />
       </Form.Group>
 
       <Button type="submit">{buttonLabel}</Button>
+=======
+          isInvalid={Boolean(errors.done)}
+          {...register("done", { required: true })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.done && "Done is required."}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Button type="submit">
+        {buttonLabel}
+      </Button>
+>>>>>>> origin/aa-RecommendationRequest-form
       <Button
         variant="Secondary"
         onClick={() => navigate(-1)}
