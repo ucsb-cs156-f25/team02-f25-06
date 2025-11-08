@@ -19,7 +19,7 @@ describe("MenuItemReviewForm tests", () => {
   const queryClient = new QueryClient();
 
   const expectedHeaders = [
-    "Item Id", 
+    "Item Id",
     "Reviewer Email",
     "Stars",
     "Date Reviewed",

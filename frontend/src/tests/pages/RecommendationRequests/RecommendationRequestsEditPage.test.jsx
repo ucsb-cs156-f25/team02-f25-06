@@ -18,8 +18,6 @@ vi.mock("react-toastify", async (importOriginal) => {
   };
 });
 
-
-
 const mockNavigate = vi.fn();
 vi.mock("react-router", async (importOriginal) => {
   const originalModule = await importOriginal();
@@ -48,7 +46,9 @@ describe("RecommendationRequestsEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/recommendationrequests", { params: { id: 17 } }).timeout();
+      axiosMock
+        .onGet("/api/recommendationrequests", { params: { id: 17 } })
+        .timeout();
     });
 
     afterEach(() => {
@@ -70,7 +70,9 @@ describe("RecommendationRequestsEditPage tests", () => {
         </QueryClientProvider>,
       );
       await screen.findByText("Edit Recommendation Request");
-      expect(screen.queryByTestId("RecommendationRequest-explanation")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("RecommendationRequest-explanation"),
+      ).not.toBeInTheDocument();
       restoreConsole();
     });
   });
@@ -86,15 +88,17 @@ describe("RecommendationRequestsEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/recommendationrequests", { params: { id: 17 } }).reply(200, {
-        id: 17,
-        requesterEmail: "abhiram_agina@ucsb.edu",
-        professorEmail: "ziad.matni@ucsb.edu",
-        explanation: "This is required for M.S. Applications.",
-        dateRequested: "2025-11-04T02:16",
-        dateNeeded: "2025-12-25T00:00",
-        done: false,
-      });
+      axiosMock
+        .onGet("/api/recommendationrequests", { params: { id: 17 } })
+        .reply(200, {
+          id: 17,
+          requesterEmail: "abhiram_agina@ucsb.edu",
+          professorEmail: "ziad.matni@ucsb.edu",
+          explanation: "This is required for M.S. Applications.",
+          dateRequested: "2025-11-04T02:16",
+          dateNeeded: "2025-12-25T00:00",
+          done: false,
+        });
       axiosMock.onPut("/api/recommendationrequests").reply(200, {
         id: 17,
         requesterEmail: "abhiram_agina@ucsb.edu.edit",
@@ -127,10 +131,18 @@ describe("RecommendationRequestsEditPage tests", () => {
       await screen.findByTestId("RecommendationRequestForm-id");
 
       const idField = screen.getByTestId("RecommendationRequestForm-id");
-      const requesterEmailField = screen.getByTestId("RecommendationRequestForm-requesterEmail");
-      const professorEmailField = screen.getByTestId("RecommendationRequestForm-professorEmail");
-      const explanationField = screen.getByTestId("RecommendationRequestForm-explanation");
-      const dateRequestedField = screen.getByLabelText("Date Requested (iso format)");
+      const requesterEmailField = screen.getByTestId(
+        "RecommendationRequestForm-requesterEmail",
+      );
+      const professorEmailField = screen.getByTestId(
+        "RecommendationRequestForm-professorEmail",
+      );
+      const explanationField = screen.getByTestId(
+        "RecommendationRequestForm-explanation",
+      );
+      const dateRequestedField = screen.getByLabelText(
+        "Date Requested (iso format)",
+      );
       const dateNeededField = screen.getByLabelText("Date Needed (iso format)");
       const doneField = screen.getByLabelText("Done");
       const submitButton = screen.getByText("Update");
@@ -142,7 +154,9 @@ describe("RecommendationRequestsEditPage tests", () => {
       expect(professorEmailField).toBeInTheDocument();
       expect(professorEmailField).toHaveValue("ziad.matni@ucsb.edu");
       expect(explanationField).toBeInTheDocument();
-      expect(explanationField).toHaveValue("This is required for M.S. Applications.");
+      expect(explanationField).toHaveValue(
+        "This is required for M.S. Applications.",
+      );
       expect(dateRequestedField).toBeInTheDocument();
       expect(dateRequestedField).toHaveValue("2025-11-04T02:16");
       expect(dateNeededField).toBeInTheDocument();
