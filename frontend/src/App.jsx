@@ -14,6 +14,7 @@ import RestaurantEditPage from "main/pages/Restaurants/RestaurantEditPage";
 import RecommendationRequestsIndexPage from "main/pages/RecommendationRequests/RecommendationRequestsIndexPage";
 import RecommendationRequestsCreatePage from "main/pages/RecommendationRequests/RecommendationRequestsCreatePage";
 import RecommendationRequestsEditPage from "main/pages/RecommendationRequests/RecommendationRequestsEditPage";
+
 import MenuItemReviewIndexPage from "main/pages/MenuItemReviews/MenuItemReviewIndexPage";
 import MenuItemReviewCreatePage from "main/pages/MenuItemReviews/MenuItemReviewCreatePage";
 import MenuItemReviewEditPage from "main/pages/MenuItemReviews/MenuItemReviewEditPage";
@@ -177,24 +178,24 @@ function App() {
       )}
       {hasRole(currentUser, "ROLE_USER") && (
         <>
-          <Route exact path="/placeholder" element={<PlaceholderIndexPage />} />
+          <Route exact path="/
+        " element={<PlaceholderIndexPage />} />
         </>
       )}
       {hasRole(currentUser, "ROLE_ADMIN") && (
         <>
           <Route
             exact
-            path="/menuitemreviews/edit/:id"
+            path="/placeholder/edit/:id"
             element={<MenuItemReviewEditPage />}
           />
           <Route
             exact
-            path="/menuitemreviews/create"
+            path="/placeholder/create"
             element={<MenuItemReviewCreatePage />}
           />
         </>
       )}
-
       {hasRole(currentUser, "ROLE_USER") && (
         <>
           <Route
