@@ -1,17 +1,17 @@
 import React from "react";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
-import { ucsbOrganizationFixtures } from "fixtures/ucsbOrganizationFixtures";
+import { recommendationRequestFixtures } from "fixtures/recommendationRequestFixtures";
 import { http, HttpResponse } from "msw";
 
-import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizationIndexPage";
+import RecommendationRequestsIndexPage from "main/pages/RecommendationRequests/RecommendationRequestsIndexPage";
 
 export default {
-  title: "pages/UCSBOrganization/UCSBOrganizationIndexPage",
-  component: UCSBOrganizationIndexPage,
+  title: "pages/RecommendationRequests/RecommendationRequestsIndexPage",
+  component: RecommendationRequestsIndexPage,
 };
 
-const Template = () => <UCSBOrganizationIndexPage storybook={true} />;
+const Template = () => <RecommendationRequestsIndexPage storybook={true} />;
 
 export const Empty = Template.bind({});
 Empty.parameters = {
@@ -26,7 +26,7 @@ Empty.parameters = {
         status: 200,
       });
     }),
-    http.get("/api/ucsborganization/all", () => {
+    http.get("/api/recommendationrequests/all", () => {
       return HttpResponse.json([], { status: 200 });
     }),
   ],
@@ -42,8 +42,10 @@ ThreeItemsOrdinaryUser.parameters = {
     http.get("/api/systemInfo", () => {
       return HttpResponse.json(systemInfoFixtures.showingNeither);
     }),
-    http.get("/api/ucsborganization/all", () => {
-      return HttpResponse.json(ucsbOrganizationFixtures.threeOrganizations);
+    http.get("/api/recommendationrequests/all", () => {
+      return HttpResponse.json(
+        recommendationRequestFixtures.threeRecommendationRequest,
+      );
     }),
   ],
 };
@@ -58,12 +60,14 @@ ThreeItemsAdminUser.parameters = {
     http.get("/api/systemInfo", () => {
       return HttpResponse.json(systemInfoFixtures.showingNeither);
     }),
-    http.get("/api/ucsborganization/all", () => {
-      return HttpResponse.json(ucsbOrganizationFixtures.threeOrganizations);
-    }),
-    http.delete("/api/ucsborganization", () => {
+    http.get("/api/recommendationrequests/all", () => {
       return HttpResponse.json(
-        { message: "UCSB Organization deleted successfully" },
+        recommendationRequestFixtures.threeRecommendationRequest,
+      );
+    }),
+    http.delete("/api/recommendationrequests", () => {
+      return HttpResponse.json(
+        { message: "Recommendation Request deleted successfully" },
         { status: 200 },
       );
     }),
