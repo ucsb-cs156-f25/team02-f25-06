@@ -178,8 +178,7 @@ function App() {
       )}
       {hasRole(currentUser, "ROLE_USER") && (
         <>
-          <Route exact path="/
-        " element={<PlaceholderIndexPage />} />
+          <Route exact path="/placeholder" element={<PlaceholderIndexPage />} />
         </>
       )}
       {hasRole(currentUser, "ROLE_ADMIN") && (
@@ -187,12 +186,12 @@ function App() {
           <Route
             exact
             path="/placeholder/edit/:id"
-            element={<MenuItemReviewEditPage />}
+            element={<PlaceholderEditPage />}
           />
           <Route
             exact
             path="/placeholder/create"
-            element={<MenuItemReviewCreatePage />}
+            element={<PlaceholderCreatePage />}
           />
         </>
       )}
