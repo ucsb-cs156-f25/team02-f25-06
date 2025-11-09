@@ -30,7 +30,7 @@ public class RecommendationRequestsWebIT extends WebTestCase {
 
     RecommendationRequest recommendationRequest1 =
         RecommendationRequest.builder()
-            .requesterEmail("abhiram_agina@ucsb.edu")
+            .requesterEmail("abhiramagina@gmail.com")
             .professorEmail("ziad.matni@ucsb.edu")
             .explanation("This is required for M.S. Applications.")
             .dateRequested(ldt1)
@@ -43,35 +43,30 @@ public class RecommendationRequestsWebIT extends WebTestCase {
     setupUser(true);
     page.getByText("Recommendation Requests").click();
 
-    assertThat(page.getByTestId("RecommendationRequestTable-cell-row-1-col-requesterEmail"))
-        .hasText("abhiram_agina@ucsb.edu");
+    assertThat(page.getByTestId("RecommendationRequestTable-cell-row-0-col-requesterEmail"))
+        .hasText("abhiramagina@gmail.com");
 
-    page.getByTestId("RecommendationRequestTable-cell-row-1-col-Delete-button").click();
-    assertThat(page.getByTestId("RecommendationRequestTable-cell-row-1-col-requesterEmail"))
+    page.getByTestId("RecommendationRequestTable-cell-row-0-col-Delete-button").click();
+    assertThat(page.getByTestId("RecommendationRequestTable-cell-row-0-col-requesterEmail"))
         .not()
         .isVisible();
-    /*
-        page.getByTestId("RecommendationRequestTable-cell-row-0-col-requesterEmail").click();
-        assertThat(page.getByText("Edit Restaurant")).isVisible();
-        page.getByTestId("RestaurantForm-description").fill("THE BEST");
-        page.getByTestId("RestaurantForm-submit").click();
-
-        assertThat(page.getByTestId("RestaurantTable-cell-row-0-col-description")).hasText("THE BEST");
-
-        page.getByTestId("RestaurantTable-cell-row-0-col-Delete-button").click();
-
-        assertThat(page.getByTestId("RestaurantTable-cell-row-0-col-name")).not().isVisible();
-    */
   }
-  /*
-    @Test
-    public void regular_user_cannot_create_restaurant() throws Exception {
-      setupUser(false);
 
-      page.getByText("Restaurants").click();
+  @Test
+  public void regular_user_cannot_create_recommendationrequest() throws Exception {
+    setupUser(false);
 
-      assertThat(page.getByText("Create Restaurant")).not().isVisible();
-      assertThat(page.getByTestId("RestaurantTable-cell-row-0-col-name")).not().isVisible();
-    }
-  */
+    page.getByText("Recommendation Requests").click();
+
+    assertThat(page.getByText("Create Recommendation Request")).not().isVisible();
+  }
+
+  @Test
+  public void admin_user_can_see_create_recommendationrequest_button() throws Exception {
+    setupUser(true);
+
+    page.getByText("Recommendation Requests").click();
+
+    assertThat(page.getByText("Create Recommendation Request")).isVisible();
+  }
 }
