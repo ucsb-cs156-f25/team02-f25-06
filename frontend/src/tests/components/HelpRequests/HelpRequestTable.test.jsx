@@ -19,8 +19,24 @@ vi.mock("react-router", async () => {
 describe("HelpRequestTable tests", () => {
     const queryClient = new QueryClient();
 
-    const expectedHeaders = ["Id", "RequesterEmail", "TeamId", "TableOrBreakoutRoom", "RequestTime", "Explanation", "Solved"];
-    const expectedFields = ["id", "requesterEmail", "teamId", "tableOrBreakoutRoom", "requestTime", "explanation", "solved"];
+    const expectedHeaders = [
+        "Id",
+        "RequesterEmail",
+        "TeamId",
+        "TableOrBreakoutRoom",
+        "RequestTime",
+        "Explanation",
+        "Solved",
+    ];
+    const expectedFields = [
+        "id",
+        "requesterEmail",
+        "teamId",
+        "tableOrBreakoutRoom",
+        "requestTime",
+        "explanation",
+        "solved",
+    ];
     const testId = "HelpRequestTable";
 
     test("renders empty table correctly", () => {
@@ -78,9 +94,9 @@ describe("HelpRequestTable tests", () => {
         });
 
         // Row 0 content checks
-        expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
-            "1",
-        );
+        expect(
+            screen.getByTestId(`${testId}-cell-row-0-col-id`),
+        ).toHaveTextContent("1");
         expect(
             screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`),
         ).toHaveTextContent("natalieforte@ucsb.edu");

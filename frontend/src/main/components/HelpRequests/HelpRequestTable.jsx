@@ -2,25 +2,21 @@ import React from "react";
 import OurTable from "main/components/OurTable";
 
 import { useBackendMutation } from "main/utils/useBackend";
-import {
-    cellToAxiosParamsDelete,
-    onDeleteSuccess,
-} from "main/utils/helpRequestUtils";
+import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/helpRequestUtils";
 import { useNavigate } from "react-router";
 import { hasRole } from "main/utils/useCurrentUser";
 
 export default function HelpRequestTable({
     helpRequests,
     currentUser,
-    testIdPrefix = "HelpRequestTable"
+    testIdPrefix = "HelpRequestTable",
 }) {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const editCallback = (cell) => {
-        navigate(`/help-requests/edit/${cell.row.original.id}`);
+        navigate(`/helprequests/edit/${cell.row.original.id}`);
     };
 
     // Stryker disable all
-
     const deleteMutation = useBackendMutation(
         cellToAxiosParamsDelete,
         { onSuccess: onDeleteSuccess },
@@ -32,7 +28,7 @@ export default function HelpRequestTable({
     const deleteCallback = async (cell) => {
         deleteMutation.mutate(cell);
     };
-    
+
     const columns = [
         { header: "Id", accessorKey: "id" },
         { header: "RequesterEmail", accessorKey: "requesterEmail" },
@@ -40,7 +36,7 @@ export default function HelpRequestTable({
         { header: "TableOrBreakoutRoom", accessorKey: "tableOrBreakoutRoom" },
         { header: "RequestTime", accessorKey: "requestTime" },
         { header: "Explanation", accessorKey: "explanation" },
-        { header: "Solved", accessorKey: "solved", cell: ({ getValue }) => String(getValue()) }
+        { header: "Solved", accessorKey: "solved", cell: ({ getValue }) => String(getValue()) },
     ];
 
     if (hasRole(currentUser, "ROLE_ADMIN")) {
