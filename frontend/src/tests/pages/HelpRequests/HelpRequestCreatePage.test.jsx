@@ -61,14 +61,14 @@ describe("HelpRequestCreatePage tests", () => {
         });
     });
 
-    test("when you fill in the form and hit submit, it makes a request to /helprequests", async () => {
+    test("when you fill in the form and hit submit, it makes a request to /helprequest", async () => {
         const queryClient = new QueryClient();
 
         const expectedPost = {
             requesterEmail: "andrewshen@ucsb.edu",
             teamId: "team06",
             tableOrBreakoutRoom: "Table 6",
-            requestTime: "2025-11-10T12:00:00",
+            requestTime: "2025-11-10T12:00",
             explanation: "Help me please",
             solved: "false",
         };
@@ -78,7 +78,7 @@ describe("HelpRequestCreatePage tests", () => {
             ...expectedPost,
         };
 
-        axiosMock.onPost("/api/helprequests/post").reply(202, helpRequest);
+        axiosMock.onPost("/api/helprequest/post").reply(202, helpRequest);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -87,36 +87,31 @@ describe("HelpRequestCreatePage tests", () => {
                 </MemoryRouter>
             </QueryClientProvider>,
         );
+        
+        const requesterEmailInput = screen.getByLabelText("RequesterEmail"); 
+        const teamIdInput = screen.getByLabelText("TeamId");
+        const tableOrBreakoutRoomInput = screen.getByLabelText("TableOrBreakoutRoom");
+        const requestTimeInput = screen.getByLabelText("RequestTime");
+        const explanationInput = screen.getByLabelText("Explanation");
+        const solvedInput = screen.getByLabelText("Solved");
+        const createButton = screen.getByText("Create");
 
         await waitFor(() => {
-            expect(screen.getByLabelText("RequesterEmail")).toBeInTheDocument();
+            expect(requesterEmailInput).toBeInTheDocument();
         });
 
-        const requesterEmailInput = screen.getByLabelText("RequesterEmail");
-        expect(requesterEmailInput).toBeInTheDocument();
-
-        const teamIdInput = screen.getByLabelText("TeamId");
+        expect(screen.getByLabelText("RequesterEmail")).toBeInTheDocument();
         expect(teamIdInput).toBeInTheDocument();
-
-        const tableOrBreakoutRoomInput = screen.getByLabelText("TableOrBreakoutRoom");
         expect(tableOrBreakoutRoomInput).toBeInTheDocument();
-
-        const requestTimeInput = screen.getByLabelText("RequestTime");
         expect(requestTimeInput).toBeInTheDocument();
-
-        const explanationInput = screen.getByLabelText("Explanation");
         expect(explanationInput).toBeInTheDocument();
-
-        const solvedInput = screen.getByLabelText("Solved");
         expect(solvedInput).toBeInTheDocument();
-
-        const createButton = screen.getByText("Create");
         expect(createButton).toBeInTheDocument();
 
         fireEvent.change(requesterEmailInput, { target: { value: "andrewshen@ucsb.edu" } });
         fireEvent.change(teamIdInput, { target: { value: "team06" } });
         fireEvent.change(tableOrBreakoutRoomInput, { target: { value: "Table 6" } });
-        fireEvent.change(requestTimeInput, { target: { value: "2025-11-10T12:00:00" } });
+        fireEvent.change(requestTimeInput, { target: { value: "2025-11-10T12:00" } });
         fireEvent.change(explanationInput, { target: { value: "Help me please" } });
         fireEvent.change(solvedInput, { target: { value: "false" } });
 
@@ -127,6 +122,6 @@ describe("HelpRequestCreatePage tests", () => {
         expect(axiosMock.history.post[0].params).toEqual(expectedPost);
 
         expect(mockToast).toHaveBeenCalledWith("New HelpRequest Created - id: 7 requesterEmail: andrewshen@ucsb.edu");
-        expect(mockNavigate).toHaveBeenCalledWith({ to: "/helprequests" });
+        expect(mockNavigate).toHaveBeenCalledWith({ to: "/helprequest" });
     });
 });

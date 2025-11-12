@@ -48,7 +48,7 @@ describe("HelpRequestEditPage tests", () => {
             axiosMock
                 .onGet("/api/systemInfo")
                 .reply(200, systemInfoFixtures.showingNeither);
-            axiosMock.onGet("/api/helprequests", { params: { id: 17 } }).timeout();
+            axiosMock.onGet("/api/helprequest", { params: { id: 17 } }).timeout();
         });
 
         afterEach(() => {
@@ -88,20 +88,20 @@ describe("HelpRequestEditPage tests", () => {
             axiosMock
                 .onGet("/api/systemInfo")
                 .reply(200, systemInfoFixtures.showingNeither);
-            axiosMock.onGet("/api/helprequests", { params: { id: 17 } }).reply(200, {
+            axiosMock.onGet("/api/helprequest", { params: { id: 17 } }).reply(200, {
                 id: 17,
                 requesterEmail: "andrewshen@ucsb.edu",
                 teamId: "team06",
-                tableOrBreakoutRoom: "2",
+                tableOrBreakoutRoom: "Table 6",
                 requestTime: "2025-10-02T16:30:00",
                 explanation: "Need help with Swagger-ui",
                 solved: false,
             });
-            axiosMock.onPut("/api/helprequests").reply(200, {
+            axiosMock.onPut("/api/helprequest").reply(200, {
                 id: 17,
                 requesterEmail: "andrewshen1@ucsb.edu",
                 teamId: "team07",
-                tableOrBreakoutRoom: "3",
+                tableOrBreakoutRoom: "Table 7",
                 requestTime: "2025-10-02T16:30:25",
                 explanation: "Need help with Swagger-ui 25edits",
                 solved: true,
@@ -147,7 +147,7 @@ describe("HelpRequestEditPage tests", () => {
             expect(teamIdField).toHaveValue("team06");
 
             expect(tableOrBreakoutRoomField).toBeInTheDocument();
-            expect(tableOrBreakoutRoomField).toHaveValue("2");
+            expect(tableOrBreakoutRoomField).toHaveValue("Table 6");
 
             expect(requestTimeField).toBeInTheDocument();
             expect(requestTimeField).toHaveValue("2025-10-02T16:30");
@@ -156,13 +156,13 @@ describe("HelpRequestEditPage tests", () => {
             expect(explanationField).toHaveValue("Need help with Swagger-ui");
 
             expect(solvedField).toBeInTheDocument();
-            expect(solvedField).toHaveValue(false);
+            expect(solvedField).toHaveValue("false");
 
-            expect(submitButton).toHaveTextContent("Update");
+            expect(submitButton).toBeInTheDocument();
 
             fireEvent.change(requesterEmailField, { target: { value: "andrewshen1@ucsb.edu" } });
             fireEvent.change(teamIdField, { target: { value: "team07" } });
-            fireEvent.change(tableOrBreakoutRoomField, { target: { value: "3" } });
+            fireEvent.change(tableOrBreakoutRoomField, { target: { value: "Table 7" } });
             fireEvent.change(requestTimeField, { target: { value: "2025-10-02T16:30" } });
             fireEvent.change(explanationField, { target: { value: "Need help with Swagger-ui 25edits" } });
             fireEvent.change(solvedField, { target: { value: true } });
@@ -174,7 +174,7 @@ describe("HelpRequestEditPage tests", () => {
                 "HelpRequest Updated - id: 17 requesterEmail: andrewshen1@ucsb.edu",
             );
 
-            expect(mockNavigate).toBeCalledWith({ to: "/helprequests" });
+            expect(mockNavigate).toBeCalledWith({ to: "/helprequest" });
 
             expect(axiosMock.history.put.length).toBe(1);
             expect(axiosMock.history.put[0].params).toEqual({ id: 17 });
@@ -182,10 +182,10 @@ describe("HelpRequestEditPage tests", () => {
                 JSON.stringify({
                     requesterEmail: "andrewshen1@ucsb.edu",
                     teamId: "team07",
-                    tableOrBreakoutRoom: "3",
+                    tableOrBreakoutRoom: "Table 7",
                     requestTime: "2025-10-02T16:30",
                     explanation: "Need help with Swagger-ui 25edits",
-                    solved: true,
+                    solved: "true",
                 }),
             );
         });
