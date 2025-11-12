@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f25/team02-f25-06
 owner: ucsb-cs156-f25
 repo_name: team02-f25-06
-pull_requests: [{"author":{"id":"U_kgDOCMvu0g","is_bot":false,"login":"austinchan3678","name":""},"headRefName":"austin-ucsborganization-e2e-test","number":131,"title":"Austin ucsborganization e2e test","url":"https://github.com/ucsb-cs156-f25/team02-f25-06/pull/131"},{"author":{"id":"U_kgDOCMvu0g","is_bot":false,"login":"austinchan3678","name":""},"headRefName":"austin-ucsborganization-integration-test","number":130,"title":"add some integration tests","url":"https://github.com/ucsb-cs156-f25/team02-f25-06/pull/130"}]
+pull_requests: [{"author":{"id":"U_kgDOCMvu0g","is_bot":false,"login":"austinchan3678","name":""},"headRefName":"austin-ucsborganization-e2e-test","number":131,"title":"Austin ucsborganization e2e test","url":"https://github.com/ucsb-cs156-f25/team02-f25-06/pull/131"}]
