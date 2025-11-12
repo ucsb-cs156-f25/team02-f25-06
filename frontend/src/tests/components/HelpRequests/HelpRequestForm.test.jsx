@@ -19,7 +19,14 @@ vi.mock("react-router", async () => {
 describe("HelpRequestForm tests", () => {
     const queryClient = new QueryClient();
 
-    const expectedHeaders = ["RequesterEmail", "TeamId", "TableOrBreakoutRoom", "RequestTime", "Explanation", "Solved"];
+    const expectedHeaders = [
+        "RequesterEmail",
+        "TeamId",
+        "TableOrBreakoutRoom",
+        "RequestTime",
+        "Explanation",
+        "Solved",
+    ];
     const testId = "HelpRequestForm";
 
     test("renders correctly with no initialContents", async () => {
@@ -43,7 +50,9 @@ describe("HelpRequestForm tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <Router>
-                    <HelpRequestForm initialContents={helpRequestFixtures.oneHelpRequest} />
+                    <HelpRequestForm
+                        initialContents={helpRequestFixtures.oneHelpRequest}
+                    />
                 </Router>
             </QueryClientProvider>,
         );
@@ -63,7 +72,7 @@ describe("HelpRequestForm tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <Router>
-                    <HelpRequestForm/>
+                    <HelpRequestForm />
                 </Router>
             </QueryClientProvider>,
         );
@@ -79,7 +88,7 @@ describe("HelpRequestForm tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <Router>
-                    <HelpRequestForm/>
+                    <HelpRequestForm />
                 </Router>
             </QueryClientProvider>,
         );
@@ -111,10 +120,11 @@ describe("HelpRequestForm tests", () => {
             expect(screen.getByText(/Max length 255 characters/)).toBeInTheDocument();
         });
         await waitFor(() => {
-            expect(screen.getByText(/Value must be either 'true' or 'false'/)).toBeInTheDocument();
+            expect(
+                screen.getByText(/Value must be either 'true' or 'false'/),
+            ).toBeInTheDocument();
         });
     });
-
 
     describe("HelpRequestForm solved validation", () => {
         const setup = () => {
@@ -124,7 +134,7 @@ describe("HelpRequestForm tests", () => {
                     <Router>
                         <HelpRequestForm submitAction={onSubmit} />
                     </Router>
-                </QueryClientProvider>
+                </QueryClientProvider>,
             );
 
             const solvedInput = screen.getByLabelText(/solved/i);
@@ -142,7 +152,7 @@ describe("HelpRequestForm tests", () => {
             await user.click(submitButton);
 
             expect(
-                await screen.findByText("Value must be either 'true' or 'false'")
+                await screen.findByText("Value must be either 'true' or 'false'"),
             ).toBeInTheDocument();
         });
 
@@ -156,7 +166,7 @@ describe("HelpRequestForm tests", () => {
 
             await waitFor(() => {
                 expect(
-                    screen.queryByText("Value must be either 'true' or 'false'")
+                    screen.queryByText("Value must be either 'true' or 'false'"),
                 ).not.toBeInTheDocument();
             });
         });
@@ -171,7 +181,7 @@ describe("HelpRequestForm tests", () => {
 
             await waitFor(() => {
                 expect(
-                    screen.queryByText("Value must be either 'true' or 'false'")
+                    screen.queryByText("Value must be either 'true' or 'false'"),
                 ).not.toBeInTheDocument();
             });
         });
