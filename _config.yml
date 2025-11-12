@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f25/team02-f25-06
 owner: ucsb-cs156-f25
 repo_name: team02-f25-06
-pull_requests: [{"author":{"id":"U_kgDOCeQtvw","is_bot":false,"login":"Helenlongjiao","name":"Longjiao Chen"},"headRefName":"longjiao-e2e-test","number":128,"title":"longjiao - add end2end test","url":"https://github.com/ucsb-cs156-f25/team02-f25-06/pull/128"},{"author":{"id":"U_kgDOCeQtvw","is_bot":false,"login":"Helenlongjiao","name":"Longjiao Chen"},"headRefName":"longjiao-integration-test","number":124,"title":"Longjiao integration test","url":"https://github.com/ucsb-cs156-f25/team02-f25-06/pull/124"}]
+pull_requests: [{"author":{"id":"U_kgDOCeQtvw","is_bot":false,"login":"Helenlongjiao","name":"Longjiao Chen"},"headRefName":"longjiao-e2e-test","number":128,"title":"longjiao - add end2end test","url":"https://github.com/ucsb-cs156-f25/team02-f25-06/pull/128"}]
