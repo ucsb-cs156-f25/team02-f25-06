@@ -93,7 +93,7 @@ public class HelpRequestIT {
     MvcResult response =
         mockMvc
             .perform(
-                post("/api/helprequest/post?requesterEmail=andrewshen@ucsb.edu&teamId=table06&tableOrBreakoutRoom=Table 6&requestTime=2025-10-28T00:00:00&explanation=Really need help&solved=true")
+                post("/api/helprequest/post?requesterEmail=andrewshen@ucsb.edu&teamId=team06&tableOrBreakoutRoom=Table 6&requestTime=2025-10-28T00:00:00&explanation=Really need help&solved=true")
                     .with(csrf()))
             .andExpect(status().isOk())
             .andReturn();
